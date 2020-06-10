@@ -28,6 +28,11 @@ public class EmployeeController {
         return employeeService.getAllEmployees();
     }
 
+    @GetMapping("/employees/pagination/{page}")
+    public List<Employee> getPageEmployees(@PathVariable Integer page) {
+        return employeeService.getPageEmployees(page);
+    }
+
     @GetMapping("/employee/{id}")
     public Employee getEmployeeById(@PathVariable Integer id){
         return employeeService.getEmployeeById(id);

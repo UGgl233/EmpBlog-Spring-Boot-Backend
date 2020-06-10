@@ -10,6 +10,7 @@ import java.util.List;
 
 @Service
 public class EmployeeService {
+
     @Autowired
     private EmployeeHelper employeeHelper;
 
@@ -19,6 +20,10 @@ public class EmployeeService {
 
     public List<Employee> getAllEmployees() {
         return employeeHelper.getAllEmployees();
+    }
+
+    public List<Employee> getPageEmployees(Integer pageNumber) {
+        return employeeHelper.getPageEmployees(pageNumber);
     }
 
     public void createEmployee(Employee temp) {
