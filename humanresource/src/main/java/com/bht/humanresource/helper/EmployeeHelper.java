@@ -4,6 +4,7 @@ import com.bht.humanresource.dao.EmployeeRepository;
 import com.bht.humanresource.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ public class EmployeeHelper {
     @Autowired
     private EmployeeRepository repo;
 
-    public Employee getEmployeeById(int id) {
+    public Employee getEmployeeById(Integer id) {
         return repo.findByEmpId(id);
     }
 
@@ -21,22 +22,21 @@ public class EmployeeHelper {
     }
 
     public void createEmployee(Employee temp) {
-        repo.save(temp);
+        repo.saveAndFlush(temp);
     }
 
-    public void updateEmployee(int id, Employee temp) {
+    public void updateEmployee(Integer id, Employee temp) {
         Employee updateEmp = repo.findByEmpId(id);
-        updateEmp.setEmpId(temp.getEmpId());
         updateEmp.setHiredate(temp.getHiredate());
         updateEmp.setJob(temp.getJob());
-        updateEmp.setManagerId(temp.getManagerId());
         updateEmp.setName(temp.getName());
         updateEmp.setSalary(temp.getSalary());
         repo.save(updateEmp);
     }
 
-    public void deleteEmployeeById(int id) {
-        repo.deleteByDepId(id);
+    @Transactional
+    public void deleteEmployeeById(Integer id) {
+        repo.deleteByEmpId(id);
     }
 
     public void deleteAllEmployees() {

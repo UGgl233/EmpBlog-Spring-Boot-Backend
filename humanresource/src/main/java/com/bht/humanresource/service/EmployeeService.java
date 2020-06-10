@@ -4,6 +4,7 @@ import com.bht.humanresource.helper.EmployeeHelper;
 import com.bht.humanresource.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ public class EmployeeService {
     @Autowired
     private EmployeeHelper employeeHelper;
 
-    public Employee getEmployeeById(int id) {
+    public Employee getEmployeeById(Integer id) {
         return employeeHelper.getEmployeeById(id);
     }
 
@@ -24,11 +25,12 @@ public class EmployeeService {
         employeeHelper.createEmployee(temp);
     }
 
-    public void updateEmployee(int id, Employee temp) {
+    public void updateEmployee(Integer id, Employee temp) {
         employeeHelper.updateEmployee(id, temp);
     }
 
-    public void deleteEmployeeById(int id) {
+    @Transactional
+    public void deleteEmployeeById(Integer id) {
         employeeHelper.deleteEmployeeById(id);
     }
 }

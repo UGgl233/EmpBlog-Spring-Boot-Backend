@@ -1,5 +1,6 @@
 package com.bht.humanresource.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -9,15 +10,19 @@ import java.sql.Date;
 public class Employee {
     @Id
     @Column(name="empid")
-//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer empId;
 
     private String name;
+
     private String job;
 
     @Column(name="manager")
     private Integer managerId;
+
+    @JsonFormat(pattern="yyyy-MM-dd", timezone="EST")
     private Date hiredate;
+
     private BigDecimal salary;
 
     @Column(name="depid")

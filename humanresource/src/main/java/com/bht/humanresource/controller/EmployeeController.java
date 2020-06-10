@@ -3,6 +3,7 @@ package com.bht.humanresource.controller;
 import com.bht.humanresource.model.Employee;
 import com.bht.humanresource.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,12 +29,12 @@ public class EmployeeController {
     }
 
     @GetMapping("/employee/{id}")
-    public Employee getEmployeeById(@PathVariable int id){
+    public Employee getEmployeeById(@PathVariable Integer id){
         return employeeService.getEmployeeById(id);
     }
 
     @PutMapping("/employee/{id}")
-    public void updateEmployee(@PathVariable int id, @RequestBody Employee temp) {
+    public void updateEmployee(@PathVariable Integer id, @RequestBody Employee temp) {
         employeeService.updateEmployee(id, temp);
     }
 
@@ -43,7 +44,8 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/employee/{id}")
-    public void deleteEmployeeById(@PathVariable int id) {
+    @Transactional
+    public void deleteEmployeeById(@PathVariable Integer id) {
         employeeService.deleteEmployeeById(id);
     }
 }
